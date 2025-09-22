@@ -1,0 +1,41 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'main',
+                    url: 'https://github.com/Asfand543/gias.git'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                echo 'No build needed for static HTML/CSS project'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                echo 'No tests configured. Skipping...'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                echo 'Deploying static website...'
+                // Example: copy files to server
+                // sh 'scp -r * user@server:/var/www/html/'
+            }
+        }
+    }
+
+    post {
+        success {
+            echo '🎉 Static website deployed successfully!'
+        }
+        failure {
+            echo '⚠️ Deployment failed!'
+        }
+    }
+}
